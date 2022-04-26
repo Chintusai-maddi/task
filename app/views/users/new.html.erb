@@ -1,0 +1,24 @@
+<h1>signup</h1>
+<%= form_with(model: @user, local: true) do |f| %>
+
+  <p class="text-center mt-4">
+    <%= f.label :username %><br/>
+    <%= f.text_field :username %>
+  </p>
+
+  <p class="text-center mt-4">
+    <%= f.label :email %><br/>
+    <%= f.email_field :email %>
+  </p>
+
+    <p class="text-center mt-4">
+      <%= f.label :password %><br/>
+      <%= f.password_field :password %>
+    </p>
+
+
+  <p class="text-center mt-4">
+    <%= f.submit "signup" %>
+  </p>
+  <% end %>
+  <%= link_to 'return to users listing',users_path %>

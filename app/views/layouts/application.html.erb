@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <% if logged_in? %>
+    <%= link_to 'to currentarticle', currentarticle_path %>
+    <%= link_to 'new articles', new_article_path %>
+    <%= link_to 'logout',logout_path, method: :delete %>
+
+    <% end %>
+    <% flash.each do |name, msg| %>
+     <%= msg %>
+   <% end %>
+    <%= yield %>
+  </body>
+</html>
