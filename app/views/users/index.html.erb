@@ -9,6 +9,8 @@
           </div>
           <div class="card-body">
             <%= link_to "View profile", user, class: "btn btn-outline-success" %>
+            <%= link_to "edit", edit_user_path(user) %>
+            <%= button_to "delete", user, method: :delete %>
           </div>
           <div class="card-footer text-muted">
             <small>Joined <%= time_ago_in_words(user.created_at) %> ago</small>

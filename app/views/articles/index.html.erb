@@ -11,8 +11,10 @@
       </p>
         <div class="card-body">
           <%= link_to "View", article_path(article) %>
+          <% if current_user== article.user %>
           <%= link_to "Edit", edit_article_path(article)%>
           <%= link_to "Delete", article, method: :delete, data: {confirm: "Are you sure?"} %>
+          <% end %>
         </div>
         <div >
           <small>Created <%= time_ago_in_words(article.created_at) %> ago,
