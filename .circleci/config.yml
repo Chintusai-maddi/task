@@ -21,6 +21,36 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+    deploy-main:
+    docker:
+      - image: cimg/ruby:3.4.1
+        environment:
+          RAILS_ENV: main
+
+    working_directory: ~/mind-api
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "c2:e4:58:90:d6:02:2d:bb:8e:50:0a:be:a7:2b:6e:42"
+            - "SHA256:OL4Tev1e9DL8/H8JdLYmB1LYY58AShibcFZ1eqF28mk"
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ arch }}-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Bundle Install
+          command: |
+            sudo gem update --system --no-document
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ arch }}-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Deploy to Azure staging if tests pass and branch is dev
+          command: bundle exec cap main deploy
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
