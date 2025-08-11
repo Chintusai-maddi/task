@@ -21,6 +21,8 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+   
+workflows:
     deploy-main:
     docker:
       - image: cimg/ruby:3.4.1
