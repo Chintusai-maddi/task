@@ -23,6 +23,8 @@ jobs:
           command: "echo Hello, World!"
    
 workflows:
+    version: 2
+    
     deploy-main:
     docker:
       - image: cimg/ruby:3.4.1
