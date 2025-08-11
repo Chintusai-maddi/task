@@ -31,7 +31,7 @@ workflows:
         environment:
           RAILS_ENV: main
 
-    working_directory: ~/mind-api
+    working_directory: ~/task
     steps:
       - add_ssh_keys:
           fingerprints:
